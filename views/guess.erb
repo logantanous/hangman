@@ -4,7 +4,7 @@
 
 <h4>Add an item to the list:</h4>
 
-<form action="/" method="post">
+<form action="/hangman" method="post">
   <div class="gallows">
     <!-- ________________<br>
     |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|<br>
@@ -19,9 +19,9 @@
         |________________<br>     -->
     ________________<br>
     |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|<br>
-    |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_☹_<br>
-    |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;0<br>
-    |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;/&nbsp;&nbsp;\<br>
+    <%= @@hanged_guy1 %>
+    <%= @@hanged_guy2 %>
+    <%= @@hanged_guy3 %>
     |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<br>
     |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<br>
     |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<br>
@@ -31,7 +31,7 @@
   </div>
   <div>
 
-    <h1> <%= @guess_template %> </h1>
+    <h1> <%= @@guy_template %> </h1>
   </div>
 
   <div class="form-group">

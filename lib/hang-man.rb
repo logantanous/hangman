@@ -5,7 +5,7 @@ class Hangman
   end
 
   def split_word
-    character_array = @input.split("")
+    @character_array = @input.split("")
   end
 
   def blank_template
@@ -19,6 +19,7 @@ class Hangman
         break       # this will cause execution to exit the loop
       end       # this will cause execution to exit the loop
     end
+
     word
   end
 

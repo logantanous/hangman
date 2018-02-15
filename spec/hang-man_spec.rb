@@ -10,6 +10,6 @@ describe('hang-man') do
 
   it("gives us an array of characters") do
     test1 = Hangman.new("test")
-    expect(test1.word_length).to(eq(4))
+    expect(test1.blank_template).to(eq("_ _ _ _ "))
   end
 end
