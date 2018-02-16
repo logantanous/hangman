@@ -14,7 +14,7 @@ class Hangman
     i = 0
     loop do
       i += 1
-      word = "#{word}_ "
+      word = "#{word}_"
       if i == word_length
         break       # this will cause execution to exit the loop
       end       # this will cause execution to exit the loop

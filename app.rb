@@ -17,7 +17,7 @@ end
   @@guesses = 0
   @@letter_array = []
 
-get('/hangman') do
+post('/') do
   @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<br>"
   @@hanged_guy2 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<br>"
   @@hanged_guy3 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<br>"
@@ -40,34 +40,76 @@ post('/hangman') do
   @guess_word = params["guess"]
   correct_array = @guess_word.split("")
   guess = Guess.new(@guess_word, @@word_one)
-
-
   i = 0
-  loop do
-    if correct_array[i] != @@letter_array[i]
-      if @@guesses == 0
-        @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;☹&nbsp;<br>"
-      end
-      if @@guesses == 1
-        @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;_☹&nbsp;<br>"
-      end
-      if @@guesses == 2
-        @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;_☹_<br>"
-      end
-      if @@guesses == 3
-        @@hanged_guy2 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;0<br>"
-      end
-      if @@guesses == 4
-        @@hanged_guy3 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;<br>"
-      end
-      if @@guesses == 5
-        @@hanged_guy3 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;/&nbsp;&nbsp;\\<br>"
-      end
-      @@guesses = @@guesses + 1;
-      break
+
+  match = false
+
+  until i == @@guy_template.length
+    if correct_array[0] == @@letter_array[i]
+      @@guy_template[i] = @@letter_array[i]
+      match = true
     end
     i += 1
   end
+
+  if match == false
+    if @@guesses == 0
+      @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;☹&nbsp;<br>"
+    elsif @@guesses == 1
+      @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;_☹&nbsp;<br>"
+    elsif @@guesses == 2
+      @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;_☹_<br>"
+    elsif @@guesses == 3
+      @@hanged_guy2 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;0<br>"
+    elsif @@guesses == 4
+      @@hanged_guy3 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;<br>"
+    elsif @@guesses == 5
+      @@hanged_guy3 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;/&nbsp;&nbsp;\\<br>"
+    end
+    @@guesses += 1
+  end
+
+  # @is_correct = false
+  # until i == @@guy_template.length
+  #   if correct_array[i] != @@letter_array[i]
+  #     @is_correct = false
+  #   else
+  #     @is_correct = true
+  #   end
+  #   i += 1
+  # end
+  #
+  # if @is_correct == false
+  #   if @@guesses == 0
+  #     @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;☹&nbsp;<br>"
+  #   elsif @@guesses == 1
+  #     @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;_☹&nbsp;<br>"
+  #   elsif @@guesses == 2
+  #     @@hanged_guy1 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;_☹_<br>"
+  #   elsif @@guesses == 3
+  #     @@hanged_guy2 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;0<br>"
+  #   elsif @@guesses == 4
+  #     @@hanged_guy3 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;<br>"
+  #   elsif @@guesses == 5
+  #     @@hanged_guy3 = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;/&nbsp;&nbsp;\\<br>"
+  #   end
+  #   @@guesses += 1
+  # end
+  #
+  # if correct_array[@@letter_i] == @@letter_array[@@letter_i]
+  #   @@guy_template[@@letter_i] = correct_array[@@letter_i]
+  #   @@letter_i += 1
+  # end
+
+
+  # until @@letter_i == @@guy_template.length
+  # # until correct_array == @@guy_template
+  #   if correct_array[@@letter_i] == @@letter_array[@@letter_i]
+  #     # @@guy_template[i] = correct_array[i]
+  #     @@guy_template[@@letter_i] = "z"
+  #   end
+  #   @@letter_i += 1
+  # end
 
   if guess.guess_word? == false
     # @hanged_guy = "|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_☹_<br>
